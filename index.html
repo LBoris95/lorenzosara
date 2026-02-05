@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Regalo di nozze</title>
+
+  <!-- Font stile partecipazione -->
+  <link href="https://fonts.googleapis.com/css2?family=Italianno&family=Libre+Baskerville:wght@400;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --green: #6f8f7a; /* verde salvia */
+    }
+
+    html, body {
+      height: 100%;
+      margin: 0;
+    }
+
+    body {
+      display: grid;
+      place-items: center;
+      background: #f8f7f3;
+      font-family: "Libre Baskerville", serif;
+    }
+
+    .poster {
+      width: min(520px, 100vw);
+      aspect-ratio: 2 / 3;
+      background: url("sfondo_fiori.png") center/cover no-repeat;
+    }
+
+    .content {
+      height: 100%;
+      padding: clamp(64px, 10vw, 96px) clamp(22px, 5vw, 34px);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      gap: 16px;
+    }
+
+    h1 {
+      font-family: "Italianno", cursive;
+      font-size: clamp(46px, 9vw, 68px);
+      font-weight: 400;
+      color: var(--green);
+      margin: 0;
+    }
+
+    .subtitle {
+      font-size: clamp(16px, 3.6vw, 22px);
+      line-height: 1.55;
+      color: var(--green);
+      max-width: 36ch;
+      margin: 0;
+    }
+
+    .divider {
+      width: 60%;
+      height: 1.5px;
+      background: var(--green);
+      opacity: 0.9;
+      margin: 2px 0;
+    }
+
+    .iban {
+      font-size: clamp(15px, 3.2vw, 21px);
+      letter-spacing: 0.04em;
+      color: var(--green);
+      word-break: break-word;
+      user-select: all;
+      max-width: 40ch;
+      margin: 0;
+    }
+
+    button {
+      margin-top: 6px;
+      padding: 12px 20px;
+      font-family: "Libre Baskerville", serif;
+      font-size: 13px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      background: transparent;
+      border: 2px solid var(--green);
+      color: var(--green);
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: rgba(111,143,122,0.12);
+    }
+
+    .hint {
+      min-height: 1.2em;
+      font-size: 13px;
+      color: var(--green);
+      margin: 0;
+    }
+  </style>
+</head>
+
+<body>
+  <main class="poster">
+    <section class="content">
+      <h1>Regalo di nozze</h1>
+
+      <p class="subtitle">
+        La vostra presenza é per noi il dono più grande<br>
+        Se volete contribuire al nostro viaggio di nozze in Giappone
+      </p>
+
+      <div class="divider"></div>
+
+      <p class="iban" id="iban">IBAN: IT73L0301503200000004352041</p>
+
+      <button type="button" onclick="copyIban()">Copia IBAN</button>
+      <p class="hint" id="hint"></p>
+    </section>
+  </main>
+
+  <script>
+    function copyIban() {
+      const iban = "IT73L0301503200000004352041";
+      navigator.clipboard.writeText(iban).then(() => {
+        const el = document.getElementById("hint");
+        el.textContent = "IBAN copiato ✓";
+        setTimeout(() => el.textContent = "", 2000);
+      }).catch(() => {
+        document.getElementById("hint").textContent = "Seleziona e copia manualmente l'IBAN.";
+      });
+    }
+  </script>
+</body>
+</html>
